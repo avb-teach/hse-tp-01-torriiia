@@ -12,13 +12,14 @@ do
         shift 2
       elif [[ -z "$input_dir" ]]; then
         input_dir=$1
-        shift
+        shift 1
       else
-        output_dir=$2
-        shift
+        output_dir=$1
+        shift 1
       fi
     fi
 done
 if [[ -z "$max_depth" ]]; then
     find "$input_dir" -type f -exec cp {} "$output_dir" \;
+fi
 exit 0
