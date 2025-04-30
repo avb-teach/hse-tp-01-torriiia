@@ -21,5 +21,11 @@ do
 done
 if [[ -z "$max_depth" ]]; then
     find "$input_dir" -type f -exec cp {} "$output_dir" \;
+else
+    find "$input_dir" -type f \    
+    | while read file; do
+        path=${file#$src/}
+        cp "$file" "/output_dir/$path"
+    done
 fi
 exit 0
