@@ -23,19 +23,18 @@ mkdir -p "$output_dir"
 if [[ -z "$max_depth" ]]; then
     find "$input_dir" -type f -exec cp {} "$output_dir" \;
 else
-    find "$input_dir" -type f \    
-    | while read file; do
+    find "$input_dir" -type f | while read file; do
         path="${file#$input_dir/}"
         depth=0
         IFS='/'
         for component in $path; do
             (($depth++))
         done
-        if [[ "$depth" -ge "$max_depth"]]; then
-            path=$(echo "$path" | cut -d'/' -f $((depth + 1))-)
+        if [[ "$depth" -ge "$max_depth" ]]; then
+            path=$(echo "$path" | cut -d'/' -f $(("$max_depth" + 1))-)
         fi
         mkdir -p "$output_dir/$(dirname "$path")"
-        cp "$file" "/output_dir/$path"
+        cp "$file" "$output_dir/$path"
     done
 fi
 exit 0
