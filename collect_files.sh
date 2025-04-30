@@ -19,12 +19,13 @@ do
       fi
     fi
 done
+mkdir -p "$output_dir"
 if [[ -z "$max_depth" ]]; then
     find "$input_dir" -type f -exec cp {} "$output_dir" \;
 else
     find "$input_dir" -type f \    
     | while read file; do
-        path="${file#$input-dir/}"
+        path="${file#$input_dir/}"
         depth=0
         IFS='/'
         for component in $path; do
