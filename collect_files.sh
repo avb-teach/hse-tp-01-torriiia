@@ -26,10 +26,12 @@ else
     find "$input_dir" -type f | while read file; do
         path="${file#$input_dir/}"
         depth=0
+        set -f
         IFS='/'
         for component in $path; do
             (($depth++))
         done
+        set +f
         if [[ "$depth" -ge "$max_depth" ]]; then
             path=$(echo "$path" | cut -d'/' -f $(("$max_depth" + 1))-)
         fi
