@@ -24,7 +24,16 @@ if [[ -z "$max_depth" ]]; then
 else
     find "$input_dir" -type f \    
     | while read file; do
-        path=${file#$src/}
+        path="${file#$input-dir/}"
+        depth=0
+        IFS='/'
+        for component in $path; do
+            (($depth++))
+        done
+        if [[ "$depth" -ge "$max_depth"]]; then
+            path=$(echo "$path" | cut -d'/' -f $((depth + 1))-)
+        fi
+        mkdir -p "$output_dir/$(dirname "$path")"
         cp "$file" "/output_dir/$path"
     done
 fi
