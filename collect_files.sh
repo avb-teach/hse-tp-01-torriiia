@@ -2,7 +2,7 @@
 max_depth=""
 input_dir=""
 output_dir=""
-while:
+while :
 do
     if [[ $# -eq 0 ]]; then
         break
@@ -19,5 +19,6 @@ do
       fi
     fi
 done
-find "$input_dir" -type f -exec cp {} "$output_dir" \;
+if [[ -z "$max_depth" ]]; then
+    find "$input_dir" -type f -exec cp {} "$output_dir" \;
 exit 0
