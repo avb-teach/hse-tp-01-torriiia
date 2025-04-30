@@ -10,7 +10,7 @@ do
       if [[ "$1" == "--max_depth" ]]; then
         max_depth=$2
         shift 2
-      elif [[ -z "input_dir" ]]; then
+      elif [[ -z "$input_dir" ]]; then
         input_dir=$1
         shift
       else
