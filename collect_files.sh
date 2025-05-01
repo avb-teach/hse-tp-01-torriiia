@@ -33,7 +33,6 @@ else
         if [[ "$depth" -ge "$max_depth" ]]; then
             path=$(echo "$path" | cut -d'/' -f $((depth - max_depth + 1))-)
         fi
-        echo "$path"
         mkdir -p "$output_dir/$(dirname "$path")"
         cp "$file" "$output_dir/$path"
     done
